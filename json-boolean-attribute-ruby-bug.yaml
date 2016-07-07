@@ -1,0 +1,36 @@
+swagger: '2.0'
+info:
+  title: Ruby code generation bug
+  description: JSON boolean values are always evaluted to false when JSON responses are deserialized.
+  version: "1.0.0"
+host: www.mocky.io
+schemes:
+  - http
+basePath: /v2
+produces:
+  - application/json
+paths:
+  /{sampleID}:
+    get:
+      summary: Sample
+      description: Returns an object with two boolean values, one evaluated to true and the other to false.
+      parameters:
+        - name: sampleID
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: The object
+          schema:
+            $ref: '#/definitions/SampleObject'
+definitions:
+  SampleObject:
+    type: object
+    properties:
+      value_true:
+        type: boolean
+        description: The attribute that is true
+      value_false:
+        type: boolean
+        description: The attribute that is false
